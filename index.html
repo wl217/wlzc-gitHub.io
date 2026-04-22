@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>王蕾 · 专业简历 | 现代极简</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2d5f9e;
+            --primary-dark: #1e3a6b;
+            --primary-glow: rgba(45, 95, 158, 0.25);
+            --accent: #e8b04e;
+            --gray-bg: #f5f7fc;
+            --card-white: #ffffff;
+            --text-dark: #1f2a3e;
+            --text-muted: #5c6b7e;
+            --border-light: #e9edf2;
+            --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.03), 0 2px 6px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 20px 30px -12px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(45, 95, 158, 0.1);
+            --transition: all 0.25s ease;
+        }
+
+        body {
+            background: linear-gradient(145deg, #eef2f8 0%, #e2e8f0 100%);
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.45;
+            padding: 2rem 1.5rem;
+        }
+
+        /* 平滑滚动 + 精致滚动条 */
+        html {
+            scroll-behavior: smooth;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        /* 主容器 - 类纸张卡片效果 */
+        .resume-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: var(--card-white);
+            border-radius: 32px;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.25), 0 2px 8px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            transition: var(--transition);
+            backdrop-filter: blur(0px);
+        }
+
+        /* 响应式网格：左侧深色/浅色专业区，右侧主要内容 */
+        .resume-grid {
+            display: grid;
+            grid-template-columns: 34% 66%;
+        }
+
+        /* ========= 左侧面板 (优雅深调 + 微光) ========= */
+        .sidebar {
+            background: #1a2a3f;
+            color: #f0f4fa;
+            padding: 2rem 1.8rem;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        /* 细微纹理光晕 */
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            left: -30%;
+            width: 160%;
+            height: 160%;
+            background: radial-gradient(circle at 30% 20%, rgba(255,255,240,0.08), transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .avatar {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        .avatar-circle {
+            width: 130px;
+            height: 130px;
+            background: linear-gradient(135deg, var(--primary), #4b7db5);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            font-weight: 500;
+            color: white;
+            box-shadow: 0 12px 22px -8px rgba(0,0,0,0.4), inset 0 1px 1px rgba(255,255,255,0.2);
+            transition: transform 0.3s ease;
+        }
+        .avatar-circle:hover {
+            transform: scale(1.02);
+        }
+        .sidebar h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+            text-align: center;
+            margin-bottom: 0.25rem;
+        }
+        .sidebar .title {
+            text-align: center;
+            color: #bdd3f0;
+            font-weight: 500;
+            font-size: 0.9rem;
+            border-bottom: 2px solid rgba(232, 176, 78, 0.5);
+            display: inline-block;
+            width: auto;
+            margin: 0 auto 1.2rem;
+            padding-bottom: 6px;
+        }
+        .contact-info, .education-side, .skills-section, .lang-section {
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-left: 3px solid var(--accent);
+            padding-left: 12px;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.85rem;
+            margin-bottom: 0.9rem;
+            color: #cfdfef;
+            transition: var(--transition);
+        }
+        .contact-item:hover {
+            transform: translateX(5px);
+            color: white;
+        }
+        .skill-tag {
+            background: rgba(255,255,245,0.12);
+            border-radius: 40px;
+            padding: 6px 14px;
+            font-size: 0.8rem;
+            margin: 0 6px 8px 0;
+            display: inline-block;
+            transition: 0.2s;
+            border: 0.5px solid rgba(255,215,150,0.2);
+        }
+        .skill-tag:hover {
+            background: var(--accent);
+            color: #1e2a36;
+            transform: scale(1.02);
+        }
+        .edu-item {
+            margin-bottom: 1rem;
+        }
+        .edu-date {
+            font-size: 0.7rem;
+            opacity: 0.7;
+            letter-spacing: 0.3px;
+        }
+        .edu-degree {
+            font-weight: 600;
+            margin: 4px 0 2px;
+        }
+
+        /* ========= 右侧内容 (干净、卡片微交互) ========= */
+        .main-content {
+            background: white;
+            padding: 2rem 2rem 2rem 2rem;
+        }
+        .right-section {
+            margin-bottom: 2rem;
+            animation: fadeUp 0.5s ease backwards;
+        }
+        .right-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 2px solid var(--border-light);
+            padding-bottom: 6px;
+        }
+        .work-item, .project-item {
+            margin-bottom: 1.4rem;
+            transition: var(--transition);
+            padding: 0.6rem 0.8rem;
+            border-radius: 20px;
+        }
+        .work-item:hover, .project-item:hover {
+            background: #fafcff;
+            box-shadow: var(--shadow-sm);
+            transform: translateX(4px);
+        }
+        .work-header, .project-header {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            align-items: baseline;
+            margin-bottom: 6px;
+        }
+        .work-title {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .work-date {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        .work-company {
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+        .desc-text {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+        .honor-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 8px;
+        }
+        .honor-list li {
+            background: #f0f4fa;
+            padding: 5px 12px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            color: #2c3e50;
+        }
+
+        /* 动画 */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 响应式 (移动端切换为上下结构) */
+        @media (max-width: 780px) {
+            body {
+                padding: 1rem;
+            }
+            .resume-grid {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                text-align: center;
+            }
+            .contact-item {
+                justify-content: center;
+            }
+            .section-title {
+                justify-content: center;
+                border-left: none;
+                border-bottom: 1px solid var(--accent);
+                padding-bottom: 6px;
+            }
+            .skill-tag {
+                margin: 4px;
+            }
+            .main-content {
+                padding: 1.5rem;
+            }
+            .work-header {
+                flex-direction: column;
+                gap: 4px;
+            }
+        }
+
+        /* 打印优化 (保留专业感) */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .resume-container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+            .sidebar {
+                background: #f0f4fa;
+                color: black;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .contact-item {
+                color: #2c3e50;
+            }
+            .skill-tag {
+                background: #e2e8f0;
+                color: black;
+                border: 1px solid #ccc;
+            }
+            .avatar-circle {
+                background: #ccc;
+            }
+            .work-item:hover {
+                transform: none;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="resume-container">
+    <div class="resume-grid">
+        <aside class="sidebar">
+            <div class="avatar">
+                <div class="avatar-circle">🌊</div>
+                <h1>王蕾</h1>
+                <div class="title">全栈开发 / 前端设计</div>
+            </div>
+
+            <div class="contact-info">
+                <div class="section-title">📞 联系方式</div>
+                <div class="contact-item">📱 +86 123 4567 3889</div>
+                <div class="contact-item">✉️ wl2882@163.com</div>
+                <div class="contact-item">🌐 github.com/wl217</div>
+                <div class="contact-item">📍 中国 · 上海</div>
+            </div>
+
+            <div class="skills-section">
+                <div class="section-title">⚙️ 技术栈</div>
+                <div>
+                    <span class="skill-tag">JavaScript (ES6+)</span>
+                    <span class="skill-tag">React / Vue</span>
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">HTML5/CSS3</span>
+                    <span class="skill-tag">Tailwind / SCSS</span>
+                    <span class="skill-tag">Git & CI/CD</span>
+                    <span class="skill-tag">Figma</span>
+                </div>
+            </div>
+
+            <div class="lang-section">
+                <div class="section-title">🗣️ 语言</div>
+                <div><span class="skill-tag">中文 (母语)</span> <span class="skill-tag">英语 (CET-6 | 读写流利)</span></div>
+            </div>
+
+            <div class="education-side">
+                <div class="section-title">🎓 教育背景</div>
+                <div class="edu-item">
+                    <div class="edu-date">2024 – 至今</div>
+                    <div class="edu-degree">信息管理与信息系统 本科</div>
+                    <div>上海对外经贸大学 · GPA 3.8/4.0</div>
+                </div>
+                <div class="edu-item">
+                    <div class="edu-date">2018 – 2024</div>
+                    <div class="edu-degree">高中 · 理科重点班</div>
+                    <div>班长 · 校优秀毕业生</div>
+                </div>
+            </div>
+            <div style="margin-top: 1rem; font-size: 0.7rem; opacity: 0.6; text-align: center;">
+                <span>⚡ 持续学习 · 追求极致</span>
+            </div>
+        </aside>
+
+        <!-- 右侧 工作/项目/证书等 -->
+        <main class="main-content">
+            <div class="right-section" style="animation-delay: 0.05s;">
+                <div class="right-title">💼 工作经验</div>
+                <div class="work-item">
+                    <div class="work-header">
+                        <span class="work-title">前端开发实习生</span>
+                        <span class="work-date">2025.01 – 至今</span>
+                    </div>
+                    <div class="work-company">上海云枢科技 · 研发中心</div>
+                    <div class="desc-text">
+                        参与公司低代码平台组件库开发，基于React+TypeScript封装20+可复用组件；优化核心页面加载速度提升32%；与设计团队协作落地设计系统，推动组件文档化。
+                    </div>
+                </div>
+                <div class="work-item">
+                    <div class="work-header">
+                        <span class="work-title">全栈项目助理 (校园孵化)</span>
+                        <span class="work-date">2024.06 – 2024.12</span>
+                    </div>
+                    <div class="work-company">智绘未来工作室 · 项目负责人</div>
+                    <div class="desc-text">
+                        领导5人团队开发校园二手交易平台，使用Vue3+Express+MongoDB，实现JWT鉴权、实时聊天模块；项目获得校创新创业一等奖，并部署于云服务器稳定运行。
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-section" style="animation-delay: 0.1s;">
+                <div class="right-title">📌 项目精选</div>
+                <div class="project-item">
+                    <div class="work-header">
+                        <span class="work-title">Aurora 视觉简历 · 动态档案站</span>
+                        <span class="work-date">2026.02</span>
+                    </div>
+                    <div class="desc-text">
+                        独立设计并开发个人品牌简历站，融合玻璃拟态、Bento网格和滚动视差动画；全响应式适配，性能评分96+，成为个人设计能力代表作。
+                    </div>
+                </div>
+                <div class="project-item">
+                    <div class="work-header">
+                        <span class="work-title">EcoDash 碳足迹仪表板</span>
+                        <span class="work-date">2025.09</span>
+                    </div>
+                    <div class="desc-text">
+                        基于ECharts + Next.js开发碳排放数据可视化面板，对接RESTful API，提供区域分析报告；获绿色计算黑客松“最佳数据叙事奖”。
+                    </div>
+                </div>
+                <div class="project-item">
+                    <div class="work-header">
+                        <span class="work-title">智能表单生成器 (form builder)</span>
+                        <span class="work-date">2025.05</span>
+                    </div>
+                    <div class="desc-text">
+                        开源项目，支持拖拽式构建表单，集成JSON Schema校验，收获GitHub 110+ star；技术栈: Vue3 + Pinia + Vuetify。
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-section" style="animation-delay: 0.15s;">
+                <div class="right-title">🏅 荣誉 & 证书</div>
+                <ul class="honor-list">
+                    <li>全国计算机设计大赛 省一等奖</li>
+                    <li>校优秀学生干部 (2次)</li>
+                    <li>蓝桥杯Web组 省二等奖</li>
+                    <li>前端架构师认证 (中级)</li>
+                    <li>Adobe 国际认证 (视觉设计)</li>
+                </ul>
+            </div>
+
+            <div class="right-section" style="animation-delay: 0.2s;">
+                <div class="right-title">✨ 自我评价</div>
+                <div class="desc-text" style="background: #F8FAFE; padding: 1rem; border-radius: 24px;">
+                    拥有扎实的工程化思维与审美直觉，对交互细节有偏执追求。善于沟通协作，乐于技术分享，保持好奇心与成长型心态。希望在一流团队中贡献可访问、高性能且优雅的数字化产品。
+                </div>
+            </div>
+
+            <div class="right-section" style="margin-top: 1rem; font-size: 0.75rem; text-align: right; border-top: 1px solid #ecf0f3; padding-top: 1rem;">
+                <span>🔗 更多作品可访问 <a href="https://wl217.github.io/wl323github.io/" target="_blank" style="color: var(--primary);">个人档案站</a> · 在线简历持续更新</span>
+            </div>
+        </main>
+    </div>
+</div>
+<!-- 添加细微底部装饰 -->
+<div style="text-align: center; margin-top: 1.5rem; font-size: 0.7rem; color: #6c7a8e;">林蔚 · 专业简历 | 设计驱动 · 代码严谨</div>
+</body>
+</html>
